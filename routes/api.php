@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\PostCondition;
