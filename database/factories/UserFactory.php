@@ -35,4 +35,16 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    
+    /**
+     * Get all of the comments for the UserFactory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projects()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }
