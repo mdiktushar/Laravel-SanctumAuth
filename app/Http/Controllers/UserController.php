@@ -33,7 +33,33 @@ class UserController extends Controller
     }
 
     public function login (Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $user = User::where('email', '=', $request->email)->first();
+        if(isset($user->id)) {
+            if(Hash::check($request->password, $user->password)) {
+                $token = $user->createToken('auth_token')->plainTextToken;
 
+                return response()->json([
+                    'status'=> 200,
+                    'message'=> 'Login successful',
+                    'token' => $token
+                ], 200);
+
+            } else {
+                return response()->json([
+                    'status'=> 404,
+                    'message' => 'password is not correct',
+                ], 404);
+            }
+        } else {
+            return response()->json([
+                'status'=> 404,
+                'message' => 'user not found',
+            ], 404);
+        }
     }
 
     public function profile () {
