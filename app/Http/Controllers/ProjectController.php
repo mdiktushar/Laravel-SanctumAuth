@@ -50,6 +50,24 @@ class ProjectController extends Controller
     }
 
     public function deleteProject ($id) {
-
+        if(Project::where([
+            'id'=> $id, 
+            'user_id' => auth()->user()->id
+        ])->exists()) {
+            Project::where([
+                'id'=> $id, 
+                'user_id' => auth()->user()->id
+            ])->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Project Deleted',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Unauthorized',
+            ], 401);
+        }
+        
     }
 }
