@@ -26,7 +26,11 @@ class ProjectController extends Controller
     }
 
     public function listProject () {
-       
+        return response()->json([
+            'status' => 200,
+            'message' => 'Project List',
+            'data' => Project::where('user_id', auth()->user()->id)->get(),
+        ], 200);
     }
 
     public function singleProject ($id) {
