@@ -34,7 +34,19 @@ class ProjectController extends Controller
     }
 
     public function singleProject ($id) {
-
+        if(Project::where('id', $id)-> exists()) {
+            $details = Project::find($id);
+            return response()->json([
+                'status' => 200,
+                'message' => 'Project',
+                'data' => $details,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Project Not Found',
+            ], 404);
+        }
     }
 
     public function deleteProject ($id) {
