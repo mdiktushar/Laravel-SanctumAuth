@@ -65,12 +65,17 @@ class UserController extends Controller
     public function profile () {
         return response()->json([
             'status'=> 200,
-            'message'=> 'Student Profile Information',
+            'message'=> 'User Profile Information',
             'data' => auth()->user() 
         ], 200);
     }
 
     public function logout () {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'status'=> 200,
+            'message'=> 'Logout Successfully',
+        ], 200);
 
     }
 }
