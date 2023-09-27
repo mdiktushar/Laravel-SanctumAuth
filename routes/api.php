@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\Framework\Attributes\PostCondition;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +25,10 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('logout', [UserController::class, 'logout']);
 
 
-    Route::post('create-project', [PostCondition::class, 'createProject']);
-    Route::get('list-project', [PostCondition::class, 'listProject']);
-    Route::get('project/{id}', [PostCondition::class, 'singleProject']);
-    Route::delete('project/{id}', [PostCondition::class, 'deleteProject']);
+    Route::post('create-project', [ProjectController::class, 'createProject']);
+    Route::get('list-project', [ProjectController::class, 'listProject']);
+    Route::get('project/{id}', [ProjectController::class, 'singleProject']);
+    Route::delete('project/{id}', [ProjectController::class, 'deleteProject']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
